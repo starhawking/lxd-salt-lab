@@ -1,0 +1,21 @@
+- hosts: salt-minions
+  tasks:
+    - name: add apt-keys
+    - apt_key: url=http://apt.tcpcloud.eu/public.gpg state=present
+
+    - name: update apt's cache
+      apt: update_cache=yes
+
+    - name: add tcpcloud repos
+      apt_repository: repo="deb [arch=amd64] http://apt.tcpcloud.eu/nightly/ trusty main security extra tcp tcp-salt" state=present
+
+    - name: install salt-master salt-minion and reclass
+      apt: name={{item}} state=installed
+      with_items:
+        - salt-common
+	- salt-master
+	- salt-minion
+	- reclass
+	- reclas-docs
+	- python-reclass
+        

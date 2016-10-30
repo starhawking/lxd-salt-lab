@@ -1,0 +1,18 @@
+#!/usr/bin/env bash                                                                                                                    
+
+local ssh_pub_key=$(cat ~/.ssh/id_rsa.pub)
+
+local lxc_profile=default
+
+local lxc_command="lxc profile set ${lxc_profile} user.user-data -"
+
+$lxc_command <<EOF                                                    
+#cloud-config                                                                                                                          
+                                                                                                                                       
+package_upgrade: true                                                                                                                  
+package_update: true                                                                                                                   
+package_reboot_if_required: true                                                                                                       
+                                                                                                                                       
+ssh_authorized_keys:                                                                                                                   
+  - ${ssh_pub_key}
+EOf
