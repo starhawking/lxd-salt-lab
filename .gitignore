@@ -1,0 +1,4 @@
+# Taylor's Git Ignore
+
+# Ignore pesky emacs backups
+.*\~$
