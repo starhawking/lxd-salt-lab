@@ -1,7 +1,10 @@
+localhost ansible_connection=local
+
 [salt-minions]
 salt-minion01 ansible_user=ubuntu ansible_become=yes
 salt-minion02 ansible_user=ubuntu ansible_become=yes
 salt-minion03 ansible_user=ubuntu ansible_become=yes
+salt-minion04 ansible_user=ubuntu ansible_become=yes
 
 [salt-masters]
 salt-master01 ansible_user=ubuntu ansible_become=yes

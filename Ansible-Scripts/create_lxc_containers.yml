@@ -1,0 +1,19 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: create containers
+      lxd_container:
+        name: "{{ item }}"
+        state: started
+        source:
+          type: image
+          fingerprint: a19c9ae2bd2e
+        profiles: ["default"]
+        wait_for_ipv4_addresses: true
+        timeout: 600
+      with_items:
+        - salt-master01
+        - salt-minion01
+        - salt-minion02
+        - salt-minion03
+        - salt-minion04
