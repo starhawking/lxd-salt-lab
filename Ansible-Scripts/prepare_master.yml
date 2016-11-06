@@ -1,0 +1,42 @@
+- hosts: salt-masters
+  tasks:
+    - name: add apt-keys
+      apt_key: url=http://apt.tcpcloud.eu/public.gpg state=present
+
+    - name: update apt's cache
+      apt: update_cache=yes
+
+    - name: add tcpcloud repos
+      apt_repository: repo="deb [arch=amd64] http://apt.tcpcloud.eu/nightly/ trusty main security extra tcp tcp-salt" state=present
+
+    - name: install reclass and salt-minion
+      apt: name={{item}} state=installed
+      with_items:
+        - salt-minion
+        - reclass
+        - reclass-doc
+        - python-reclass
+
+    - name: install salt-master salt-minion and reclass
+      apt: name={{item}} state=installed
+      ignore_errors: yes
+      with_items:
+        - salt-master
+
+    - name: fix issue with ulimits in init files so the master will start
+      copy: src=files/master-init-fix.conf dest=/etc/init/salt-master.conf owner=root group=root mode=644
+
+    - name: point minion to master
+      copy: src=files/master.conf dest=/etc/salt/minion.d/master.conf owner=root group=root mode=644
+
+    - name: reinstall salt-master to allow our fixed init script to go into place
+      apt: name={{item}} state=installed
+      with_items:
+        - salt-minion
+        - salt-master
+
+    - name: restart salt-services service
+      service: name={{item}} state=restarted
+      with_items:
+        - salt-master
+        - salt-minion

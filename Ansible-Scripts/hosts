@@ -1,3 +1,7 @@
 [salt-minions]
-10.1.14.152 ansible_user=ubuntu ansible_become=yes
-10.1.14.59 ansible_user=ubuntu ansible_become=yes
+salt-minion01 ansible_user=ubuntu ansible_become=yes
+salt-minion02 ansible_user=ubuntu ansible_become=yes
+salt-minion03 ansible_user=ubuntu ansible_become=yes
+
+[salt-masters]
+salt-master01 ansible_user=ubuntu ansible_become=yes

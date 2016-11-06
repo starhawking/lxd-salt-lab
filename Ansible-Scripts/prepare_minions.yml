@@ -9,7 +9,7 @@
     - name: add tcpcloud repos
       apt_repository: repo="deb [arch=amd64] http://apt.tcpcloud.eu/nightly/ trusty main security extra tcp tcp-salt" state=present
 
-    - name: install salt-master salt-minion and reclass
+    - name: install salt-minion and reclass
       apt: name={{item}} state=installed
       with_items:
         - salt-common
@@ -19,7 +19,7 @@
         - python-reclass
 
     - name: point minion to master
-      copy: src=master.conf dest=/etc/salt/minion.d/master.conf owner=root group=root mode=644
+      copy: src=files/master.conf dest=/etc/salt/minion.d/master.conf owner=root group=root mode=644
 
     - name: restart salt-minion service
       service: name=salt-minion state=restarted

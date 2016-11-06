@@ -1,2 +1,0 @@
-[salt-minions]
-10.1.14.200 ansible_ssh_user=ubuntu
