@@ -1,0 +1,31 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: add hpe linux repo public keys
+      apt_key: url=http://downloads.linux.hpe.com/SDR/hpPublicKey1024.pub state=present
+      
+    - name: add hpe linux repo public keys
+      apt_key: url=http://downloads.linux.hpe.com/SDR/hpPublicKey2048.pub state=present
+      
+    - name: add hpe linux repo public keys
+      apt_key: url=http://downloads.linux.hpe.com/SDR/hpPublicKey2048_key1.pub state=present
+
+    - name: add hpe linux repo public keys
+      apt_key: url=http://downloads.linux.hpe.com/SDR/hpePublicKey2048_key1.pub state=present
+
+    - name: update apt cache
+      apt: update_cache=yes
+
+    - name: add hpe linux repos
+      apt_repository: repo="deb http://downloads.linux.hpe.com/SDR/repo/mcp/ubuntu xenial/current non-free" state=present
+
+    - name: update apt cache
+      apt: update_cache=yes
+
+    - name: install ipmitool
+      apt: name={{item}} state=installed
+      with_items:
+        - ipmitool
+        - hponcfg
+        - hp-health
+        - hpssacli
