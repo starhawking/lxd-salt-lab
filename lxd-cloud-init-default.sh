@@ -14,7 +14,8 @@ $lxc_command <<EOF
 package_upgrade: true                                                                                                                  
 package_update: true                                                                                                                   
 package_reboot_if_required: true                                                                                                       
-                                                                                                                                       
+packages:
+  - python                                                                                                                                       
 ssh_authorized_keys:                                                                                                                   
   - ${ssh_pub_key}
 EOF
