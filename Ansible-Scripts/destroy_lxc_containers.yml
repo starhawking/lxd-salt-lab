@@ -1,0 +1,13 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: delete containers
+      lxd_container:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - salt-master01
+        - salt-minion01
+        - salt-minion02
+        - salt-minion03
+        - salt-minion04

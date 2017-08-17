@@ -7,7 +7,7 @@
         state: started
         source:
           type: image
-          fingerprint: a19c9ae2bd2e
+          fingerprint: 8b51ee006f13446fbd0b753c88ec367b699183bbb357dbfee487aa39b6447042
         profiles: ["default"]
         wait_for_ipv4_addresses: true
         timeout: 600
